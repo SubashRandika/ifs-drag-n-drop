@@ -1,0 +1,19 @@
+<mat-grid-list cols="4" rowHeight="150px" gutterSize="10px">
+  @for (widget of widgets; track widget.id) {
+  <mat-grid-tile [colspan]="widget.columns" [rowspan]="widget.rows">
+    <cdk-drop-list [cdkDropListConnectedTo]="drops" [cdkDropListData]="$index">
+      <mat-card
+        class="widget-card"
+        cdkDrag
+        (cdkDragEntered)="onDragEntered($event)"
+        [cdkDragData]="$index"
+        [style.backgroundColor]="widget.backgroundColor"
+      >
+        <mat-card-content class="widget-card-content">
+          {{ widget.content }}
+        </mat-card-content>
+      </mat-card>
+    </cdk-drop-list>
+  </mat-grid-tile>
+  }
+</mat-grid-list>

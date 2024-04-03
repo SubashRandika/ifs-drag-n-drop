@@ -1,0 +1,22 @@
+<mat-grid-list cols="4" rowHeight="150px" gutterSize="10px">
+  @for(widget of widgets; track widget.id) {
+  <mat-grid-tile
+    class="widget-tile"
+    [class.over]="dragWidget.over$ | async"
+    dragDrop
+    #dragWidget="dragDrop"
+    [colspan]="widget.columns"
+    [rowspan]="widget.rows"
+    [dragSource]="dragWidget.source"
+    [dropTarget]="dragWidget.target"
+    [style.opacity]="dragWidget.opacity$ | async"
+    [style.backgroundColor]="widget.backgroundColor"
+    [index]="$index"
+    (beginDrag)="beginDrag()"
+    (endDrag)="endDrag($event)"
+    (handleMove)="moveCard($event)"
+  >
+    <div class="widget-content">{{ widget.content }}</div>
+  </mat-grid-tile>
+  }
+</mat-grid-list>

@@ -5,12 +5,17 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
+import { HTML5Backend } from '@ng-dnd/multi-backend';
+import { DndModule } from '@ng-dnd/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(),
-    importProvidersFrom(MatNativeDateModule),
+    importProvidersFrom(
+      MatNativeDateModule,
+      DndModule.forRoot({ backend: HTML5Backend })
+    ),
   ],
 };

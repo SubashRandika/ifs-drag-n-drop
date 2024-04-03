@@ -1,0 +1,11 @@
+.widget-tile {
+  cursor: all-scroll;
+
+  &.over {
+    border: 3px dotted black;
+  }
+
+  .widget-content {
+    font-size: 20px;
+  }
+}

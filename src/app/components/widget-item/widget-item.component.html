@@ -1,0 +1,11 @@
+<mat-card
+  class="widget-card"
+  cdkDrag
+  (cdkDragEntered)="widgetDragEntered($event)"
+  [cdkDragData]="dragData"
+  [style.backgroundColor]="widget.backgroundColor"
+>
+  <mat-card-content class="widget-card-content">
+    {{ widget.content }}
+  </mat-card-content>
+</mat-card>

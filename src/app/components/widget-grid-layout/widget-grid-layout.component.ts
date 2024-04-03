@@ -13,17 +13,23 @@ import {
 } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { generateRandomLightColor } from '../../../utils/colors';
 import { Widget } from '../../models/widget.models';
+import { generateRandomLightColor } from '../../../utils/colors';
+import { WidgetItemComponent } from '../widget-item/widget-item.component';
 
 @Component({
-  selector: 'widget-wrapper',
-  templateUrl: './widget-wrapper.component.html',
-  styleUrls: ['./widget-wrapper.component.css'],
+  selector: 'widget-grid-layout',
+  templateUrl: './widget-grid-layout.component.html',
+  styleUrls: ['./widget-grid-layout.component.css'],
   standalone: true,
-  imports: [MatGridListModule, MatCardModule, DragDropModule],
+  imports: [
+    MatGridListModule,
+    MatCardModule,
+    DragDropModule,
+    WidgetItemComponent,
+  ],
 })
-export class WidgetWrapperComponent implements OnInit, AfterViewInit {
+export class WidgetGridLayoutComponent implements OnInit, AfterViewInit {
   @ViewChildren(CdkDropList) dropsQuery!: QueryList<CdkDropList>;
 
   drops: CdkDropList[] = [];

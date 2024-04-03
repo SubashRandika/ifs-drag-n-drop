@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { WidgetWrapperComponent } from './widget-wrapper.component';
+import { WidgetGridLayoutComponent } from './widget-grid-layout.component';
 
-describe('WidgetWrapperComponent', () => {
-  let component: WidgetWrapperComponent;
-  let fixture: ComponentFixture<WidgetWrapperComponent>;
+describe('WidgetGridLayoutComponent', () => {
+  let component: WidgetGridLayoutComponent;
+  let fixture: ComponentFixture<WidgetGridLayoutComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WidgetWrapperComponent ]
+      declarations: [ WidgetGridLayoutComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WidgetWrapperComponent);
+    fixture = TestBed.createComponent(WidgetGridLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

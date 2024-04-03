@@ -1,0 +1,13 @@
+<mat-grid-list cols="4" rowHeight="150px" gutterSize="10px">
+  @for (widget of widgets; track widget.id) {
+  <mat-grid-tile [colspan]="widget.columns" [rowspan]="widget.rows">
+    <cdk-drop-list [cdkDropListConnectedTo]="drops" [cdkDropListData]="$index">
+      <widget-item
+        [widget]="widget"
+        [dragData]="$index"
+        (cdkOnDragEntered)="onDragEntered($event)"
+      />
+    </cdk-drop-list>
+  </mat-grid-tile>
+  }
+</mat-grid-list>

@@ -1,0 +1,28 @@
+<div class="actions-container">
+  <div class="left-actions">
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="generateLayout()"
+      [disabled]="!editModeOn"
+    >
+      Generate Random Layout
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="addWidgetToLayout()"
+      [disabled]="!editModeOn"
+    >
+      Add New Widget
+    </button>
+  </div>
+  <button
+    mat-mini-fab
+    [color]="editModeOn ? 'warn' : 'primary'"
+    aria-label="Edit Mode"
+    (click)="toggleEditMode()"
+  >
+    <mat-icon [fontIcon]="editModeOn ? 'done' : 'edit'"></mat-icon>
+  </button>
+</div>

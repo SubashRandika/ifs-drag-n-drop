@@ -1,0 +1,56 @@
+ktd-grid {
+  transition: height 500ms ease;
+
+  .custom-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: medium;
+    background: rgba(220, 220, 220, 0.7);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    border: 2px dotted rgba(54, 54, 54, 0.35);
+  }
+}
+
+.grid-item-content {
+  box-sizing: border-box;
+  background-color: #fafafa;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: move;
+
+  &.edit-disabled {
+    cursor: not-allowed;
+  }
+}
+
+.widget-remove-handle {
+  position: absolute;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  top: 0;
+  right: 0;
+
+  .btn-delete-icon {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4px;
+
+    .mat-icon {
+      color: rgb(40, 40, 40, 0.9);
+    }
+  }
+}

@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^17.1.0",
     "@angular/platform-browser-dynamic": "^17.1.0",
     "@angular/router": "^17.1.0",
+    "@katoid/angular-grid-layout": "^2.2.0",
     "@ng-dnd/core": "^2.0.2",
     "@ng-dnd/multi-backend": "^2.0.2",
     "rxjs": "~7.8.0",

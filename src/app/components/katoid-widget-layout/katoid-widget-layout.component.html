@@ -1,0 +1,54 @@
+<widget-layout-actions-panel
+  [editModeOn]="isEditModeOn"
+  (generateRandomLayout)="onRandomLayoutGenerated()"
+  (addNewWidget)="addWidgetToLayout()"
+  (editWidgetLayout)="toggleEditMode()"
+/>
+
+<ktd-grid
+  [backgroundConfig]="gridBackgroundConfig"
+  [cols]="cols"
+  [gap]="gap"
+  [rowHeight]="rowHeight"
+  [layout]="layout"
+  (layoutUpdated)="onLayoutUpdated($event)"
+>
+  @for (item of layout; track trackById) {
+  <ktd-grid-item
+    [id]="item.id"
+    [draggable]="!disableDrag"
+    [resizable]="!disableResize"
+  >
+    <!-- Your entire widget content goes here -->
+    <mat-card
+      class="grid-item-content"
+      [ngClass]="{ 'edit-disabled': !isEditModeOn }"
+      [appearance]="'outlined'"
+      [style.backgroundColor]="item.backgroundColor"
+    >
+      <mat-card-content>{{ item.content }}</mat-card-content>
+    </mat-card>
+    <!-- Your widget deletion handle goes here -->
+    @if (!disableRemove) {
+    <div class="widget-remove-handle">
+      <button
+        mat-icon-button
+        class="btn-delete-icon"
+        aria-label="Delete icon for widget"
+        (click)="removeWidgetFromLayout(item.id)"
+      >
+        <mat-icon fontIcon="delete"></mat-icon>
+      </button>
+    </div>
+    }
+
+    <!-- Optional Custom placeholder template goes here-->
+    <ng-template ktdGridItemPlaceholder>
+      <!-- Custom placeholder content goes here -->
+      <div class="grid-item-content custom-placeholder">
+        {{ item.content }}
+      </div>
+    </ng-template>
+  </ktd-grid-item>
+  }
+</ktd-grid>

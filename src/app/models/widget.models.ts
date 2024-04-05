@@ -1,3 +1,5 @@
+import { KtdGridLayoutItem } from '@katoid/angular-grid-layout';
+
 export interface Widget {
   id: number;
   backgroundColor: string;
@@ -5,3 +7,10 @@ export interface Widget {
   rows: number;
   content: string;
 }
+
+export interface WidgetLayoutItem extends KtdGridLayoutItem {
+  content?: string;
+  backgroundColor?: string;
+}
+
+export declare type WidgetLayout = WidgetLayoutItem[];

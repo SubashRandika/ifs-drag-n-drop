@@ -9,8 +9,8 @@ import {
   KtdGridModule,
   ktdTrackById,
 } from '@katoid/angular-grid-layout';
-import { ktdArrayRemoveItem } from '../../../utils/arrayUtils';
-import { generateRandomLightColor } from '../../../utils/colors';
+import { ktdArrayRemoveItem } from '../../utils/arrayUtils';
+import { generateRandomLightColor } from '../../utils/colors';
 import { WidgetLayout, WidgetLayoutItem } from '../../models/widget.models';
 import { WidgetLayoutActionsPanelComponent } from './widget-layout-actions-panel/widget-layout-actions-panel.component';
 

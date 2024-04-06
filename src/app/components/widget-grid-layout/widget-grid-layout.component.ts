@@ -14,8 +14,8 @@ import {
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { Widget } from '../../models/widget.models';
-import { generateRandomLightColor } from '../../../utils/colors';
-import { WidgetItemComponent } from '../widget-item/widget-item.component';
+import { generateRandomLightColor } from '../../utils/colors';
+import { WidgetItemComponent } from './widget-item/widget-item.component';
 
 @Component({
   selector: 'widget-grid-layout',

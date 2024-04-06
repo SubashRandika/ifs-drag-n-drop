@@ -2,7 +2,7 @@ import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { DndModule } from '@ng-dnd/core';
-import { generateRandomLightColor } from '../../../utils/colors';
+import { generateRandomLightColor } from '../../utils/colors';
 import { DragDropDirective } from '../../directives/drag-drop.directive';
 import { Widget } from '../../models/widget.models';
 import { AsyncPipe, NgIf } from '@angular/common';

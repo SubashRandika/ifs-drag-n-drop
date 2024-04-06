@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { Widget } from '../../models/widget.models';
+import { Widget } from '../../../models/widget.models';
 import { CdkDragEnter, DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({

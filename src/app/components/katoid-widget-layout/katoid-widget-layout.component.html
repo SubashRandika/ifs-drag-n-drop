@@ -11,6 +11,7 @@
   [gap]="gap"
   [rowHeight]="rowHeight"
   [layout]="layout"
+  [scrollableParent]="document"
   (layoutUpdated)="onLayoutUpdated($event)"
 >
   @for (item of layout; track trackById) {

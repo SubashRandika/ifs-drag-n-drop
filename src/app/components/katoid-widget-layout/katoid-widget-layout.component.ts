@@ -1,11 +1,12 @@
-import { NgClass } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT, NgClass } from '@angular/common';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import {
   KtdGridBackgroundCfg,
   ktdGridCompact,
+  KtdGridComponent,
   KtdGridModule,
   ktdTrackById,
 } from '@katoid/angular-grid-layout';
@@ -13,6 +14,7 @@ import { ktdArrayRemoveItem } from '../../utils/arrayUtils';
 import { generateRandomLightColor } from '../../utils/colors';
 import { WidgetLayout, WidgetLayoutItem } from '../../models/widget.models';
 import { WidgetLayoutActionsPanelComponent } from './widget-layout-actions-panel/widget-layout-actions-panel.component';
+import { debounceTime, filter, fromEvent, merge, Subscription } from 'rxjs';
 
 @Component({
   selector: 'katoid-widget-layout',
@@ -29,6 +31,10 @@ import { WidgetLayoutActionsPanelComponent } from './widget-layout-actions-panel
   ],
 })
 export class KatoidWidgetLayoutComponent implements OnInit {
+  public document: Document = inject(DOCUMENT);
+
+  @ViewChild(KtdGridComponent, { static: true }) grid!: KtdGridComponent;
+
   cols: number = 8;
   gap: number = 10;
   rowHeight: number = 30;
@@ -37,6 +43,9 @@ export class KatoidWidgetLayoutComponent implements OnInit {
   disableResize: boolean = true;
   disableRemove: boolean = true;
   isEditModeOn: boolean = false;
+  autoResize: boolean = true;
+
+  resizeSubscription!: Subscription;
 
   gridBackgroundConfig: Required<KtdGridBackgroundCfg> = {
     show: 'whenDragging',
@@ -133,7 +142,19 @@ export class KatoidWidgetLayoutComponent implements OnInit {
 
   trackById = ktdTrackById;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.resizeSubscription = merge(
+      fromEvent(window, 'resize'),
+      fromEvent(window, 'orientationchange')
+    )
+      .pipe(
+        debounceTime(50),
+        filter(() => this.autoResize)
+      )
+      .subscribe(() => {
+        this.grid.resize();
+      });
+  }
 
   onLayoutUpdated(event: WidgetLayout) {
     console.log('onLayoutUpdated', event);

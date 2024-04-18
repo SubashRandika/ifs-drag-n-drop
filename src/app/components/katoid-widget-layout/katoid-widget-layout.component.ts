@@ -10,11 +10,10 @@ import {
   KtdGridModule,
   ktdTrackById,
 } from '@katoid/angular-grid-layout';
-import { ktdArrayRemoveItem } from '../../utils/arrayUtils';
-import { generateRandomLightColor } from '../../utils/colors';
-import { WidgetLayout, WidgetLayoutItem } from '../../models/widget.models';
-import { WidgetLayoutActionsPanelComponent } from './widget-layout-actions-panel/widget-layout-actions-panel.component';
 import { debounceTime, filter, fromEvent, merge, Subscription } from 'rxjs';
+import { WidgetLayout, WidgetLayoutItem } from '../../models/widget.models';
+import { generateRandomLightColor } from '../../utils/colors';
+import { WidgetLayoutActionsPanelComponent } from './widget-layout-actions-panel/widget-layout-actions-panel.component';
 
 @Component({
   selector: 'katoid-widget-layout',
@@ -32,16 +31,18 @@ import { debounceTime, filter, fromEvent, merge, Subscription } from 'rxjs';
 })
 export class KatoidWidgetLayoutComponent implements OnInit {
   public document: Document = inject(DOCUMENT);
+  minWidth: number = 2;
+  minHeight: number = 5;
 
   @ViewChild(KtdGridComponent, { static: true }) grid!: KtdGridComponent;
 
-  cols: number = 8;
+  cols: number = 4;
   gap: number = 10;
   rowHeight: number = 30;
   rowHeightFit: boolean = false;
   disableDrag: boolean = true;
-  disableResize: boolean = true;
-  disableRemove: boolean = true;
+  // disableResize: boolean = true;
+  // disableRemove: boolean = true;
   isEditModeOn: boolean = false;
   autoResize: boolean = true;
 
@@ -63,8 +64,8 @@ export class KatoidWidgetLayoutComponent implements OnInit {
       backgroundColor: generateRandomLightColor(),
       x: 0,
       y: 0,
-      w: 2,
-      h: 4,
+      w: this.minWidth,
+      h: this.minHeight,
     },
     {
       id: '2',
@@ -72,8 +73,8 @@ export class KatoidWidgetLayoutComponent implements OnInit {
       backgroundColor: generateRandomLightColor(),
       x: 2,
       y: 0,
-      w: 6,
-      h: 4,
+      w: this.minWidth,
+      h: this.minHeight,
     },
     {
       id: '3',
@@ -81,26 +82,26 @@ export class KatoidWidgetLayoutComponent implements OnInit {
       backgroundColor: generateRandomLightColor(),
       x: 0,
       y: 4,
-      w: 4,
-      h: 4,
+      w: this.minWidth * 2,
+      h: this.minHeight,
     },
     {
       id: '4',
       content: 'Widget 4',
       backgroundColor: generateRandomLightColor(),
-      x: 4,
-      y: 4,
-      w: 2,
-      h: 4,
+      x: 0,
+      y: 8,
+      w: this.minWidth,
+      h: this.minHeight,
     },
     {
       id: '5',
       content: 'Widget 5',
       backgroundColor: generateRandomLightColor(),
-      x: 6,
+      x: 2,
       y: 4,
-      w: 2,
-      h: 4,
+      w: this.minWidth,
+      h: this.minHeight,
     },
     {
       id: '6',
@@ -108,35 +109,8 @@ export class KatoidWidgetLayoutComponent implements OnInit {
       backgroundColor: generateRandomLightColor(),
       x: 0,
       y: 8,
-      w: 4,
-      h: 8,
-    },
-    {
-      id: '7',
-      content: 'Widget 7',
-      backgroundColor: generateRandomLightColor(),
-      x: 4,
-      y: 8,
-      w: 4,
-      h: 4,
-    },
-    {
-      id: '8',
-      content: 'Widget 8',
-      backgroundColor: generateRandomLightColor(),
-      x: 6,
-      y: 12,
-      w: 2,
-      h: 4,
-    },
-    {
-      id: '9',
-      content: 'Widget 9',
-      backgroundColor: generateRandomLightColor(),
-      x: 0,
-      y: 16,
-      w: 8,
-      h: 4,
+      w: this.minWidth,
+      h: this.minHeight,
     },
   ];
 
@@ -179,11 +153,11 @@ export class KatoidWidgetLayoutComponent implements OnInit {
     this.layout = this.addDynamicContentAndColorIntoWidgets();
   }
 
-  removeWidgetFromLayout(id: string) {
-    // Important: Don't mutate the original array.
-    //            Let Angular know that the layout has changed creating a new reference.
-    this.layout = ktdArrayRemoveItem(this.layout, (item) => item.id === id);
-  }
+  // removeWidgetFromLayout(id: string) {
+  //   // Important: Don't mutate the original array.
+  //   //            Let Angular know that the layout has changed creating a new reference.
+  //   this.layout = ktdArrayRemoveItem(this.layout, (item) => item.id === id);
+  // }
 
   addDynamicContentAndColorIntoWidgets(): WidgetLayout {
     return this.layout.map((item) => {
@@ -222,9 +196,10 @@ export class KatoidWidgetLayoutComponent implements OnInit {
 
   toggleEditMode() {
     this.disableDrag = !this.disableDrag;
-    this.disableRemove = !this.disableRemove;
-    this.disableResize = !this.disableResize;
-    this.isEditModeOn =
-      !this.disableDrag && !this.disableRemove && !this.disableResize;
+    // this.disableRemove = !this.disableRemove;
+    // this.disableResize = !this.disableResize;
+    // this.isEditModeOn =
+    //   !this.disableDrag && !this.disableRemove && !this.disableResize;
+    this.isEditModeOn = !this.disableDrag;
   }
 }

@@ -18,7 +18,9 @@
   <ktd-grid-item
     [id]="item.id"
     [draggable]="!disableDrag"
-    [resizable]="!disableResize"
+    [resizable]="false"
+    [minW]="minWidth"
+    [minH]="minHeight"
   >
     <!-- Your entire widget content goes here -->
     <mat-card
@@ -30,7 +32,7 @@
       <mat-card-content>{{ item.content }}</mat-card-content>
     </mat-card>
     <!-- Your widget deletion handle goes here -->
-    @if (!disableRemove) {
+    <!-- @if (!disableRemove) {
     <div class="widget-remove-handle">
       <button
         mat-icon-button
@@ -41,7 +43,7 @@
         <mat-icon fontIcon="delete"></mat-icon>
       </button>
     </div>
-    }
+    } -->
 
     <!-- Optional Custom placeholder template goes here-->
     <ng-template ktdGridItemPlaceholder>

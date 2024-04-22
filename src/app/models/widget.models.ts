@@ -8,6 +8,13 @@ export interface Widget {
   content: string;
 }
 
+export interface WidgetItem {
+  id: string;
+  backgroundColor: string;
+  content: string;
+  isFullWidth: boolean;
+}
+
 export interface WidgetLayoutItem extends KtdGridLayoutItem {
   content?: string;
   backgroundColor?: string;

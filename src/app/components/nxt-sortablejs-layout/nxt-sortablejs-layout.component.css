@@ -1,0 +1,46 @@
+.nxt-draggable-layout {
+  max-width: 100%;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 180px;
+
+  .nxt-draggable-widget {
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    min-height: 180px;
+
+    &.full-width-widget {
+      grid-column: span 2;
+    }
+  }
+
+  .widget-ghost-placeholder {
+    background-color: rgb(246, 246, 246) !important;
+    border: 2px dotted rgba(54, 54, 54, 0.35);
+    min-height: 180px;
+  }
+
+  .widget-dragging {
+    background: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2.8px);
+    -webkit-backdrop-filter: blur(2.8px);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .nxt-draggable-layout {
+    grid-template-columns: 1fr;
+
+    .nxt-draggable-widget {
+      &.full-width-widget {
+        grid-column: span 1;
+      }
+    }
+  }
+}

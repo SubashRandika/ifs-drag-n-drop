@@ -7,6 +7,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HTML5Backend } from '@ng-dnd/multi-backend';
 import { DndModule } from '@ng-dnd/core';
+import { SortablejsModule } from 'nxt-sortablejs';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,7 +16,10 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     importProvidersFrom(
       MatNativeDateModule,
-      DndModule.forRoot({ backend: HTML5Backend })
+      DndModule.forRoot({ backend: HTML5Backend }),
+      SortablejsModule.forRoot({
+        animation: 250,
+      })
     ),
   ],
 };

@@ -1,3 +1,7 @@
+import { Widget, WidgetItem } from '../models/widget.models';
+import { generateRandomLightColor } from './colors';
+import { generateRandomBoolean, generateRandomUUID } from './randomInfo';
+
 /**
  * Removes and item from an array. Returns a new array instance (it doesn't mutate the source array).
  * @param array source array to be returned without the element to remove
@@ -15,4 +19,19 @@ export function ktdArrayRemoveItem<T>(
   }
 
   return arrayCopy;
+}
+
+export function generateRandomWidgetItems(): WidgetItem[] {
+  const items: WidgetItem[] = [];
+
+  for (let i = 0; i < 8; i++) {
+    items.push({
+      id: generateRandomUUID(),
+      backgroundColor: generateRandomLightColor(),
+      content: `Widget-${i + 1}`,
+      isFullWidth: generateRandomBoolean(),
+    });
+  }
+
+  return items;
 }

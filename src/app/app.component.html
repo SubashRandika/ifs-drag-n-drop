@@ -1,4 +1,4 @@
-<main class="main">
+<main #mainRef class="main">
   <!-- This is using mat-grid & cdkDragList. Have some concerns with animations -->
   <!-- <widget-grid-layout /> -->
 
@@ -6,5 +6,8 @@
   <!-- <ng-dnd-widget-layout /> -->
 
   <!-- The is most advanced and reliable library solutions found so far (https://github.com/katoid/angular-grid-layout) -->
-  <katoid-widget-layout />
+  <!-- <katoid-widget-layout /> -->
+
+  <!-- This is simple library that has good Snyk score as well (https://www.npmjs.com/package/nxt-sortablejs?activeTab=readme)-->
+  <nxt-sortablejs-layout [containerRef]="mainElement" />
 </main>

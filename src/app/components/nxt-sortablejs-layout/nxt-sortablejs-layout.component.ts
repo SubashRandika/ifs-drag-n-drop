@@ -1,7 +1,8 @@
 import { NgClass, NgIf } from '@angular/common';
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SortablejsModule } from 'nxt-sortablejs';
 import { Options } from 'sortablejs';
+import { pulseAnimation } from '../../animations/widget.animation';
 import { WidgetItem } from '../../models/widget.models';
 import { generateRandomWidgetItems } from '../../utils/arrayUtils';
 import { generateRandomLightColor } from '../../utils/colors';
@@ -17,12 +18,13 @@ import { WidgetLayoutActionsPanelComponent } from '../katoid-widget-layout/widge
   styleUrls: ['./nxt-sortablejs-layout.component.css'],
   standalone: true,
   imports: [SortablejsModule, NgClass, WidgetLayoutActionsPanelComponent, NgIf],
+  animations: [pulseAnimation],
 })
 export class NxtSortablejsLayoutComponent implements OnInit {
-  @Input()
-  containerRef!: ElementRef<HTMLElement>;
+  @Output() newWidgetAdded = new EventEmitter<void>();
 
   isEditModeOn: boolean = false;
+  isNewWidgetAdded: boolean = false;
 
   widgets: WidgetItem[] = generateRandomWidgetItems();
 
@@ -53,22 +55,15 @@ export class NxtSortablejsLayoutComponent implements OnInit {
     };
 
     this.widgets = [...this.widgets, newWidgetItem];
+    this.isNewWidgetAdded = true;
 
     setTimeout(() => {
-      this.scrollBottom();
+      this.newWidgetAdded.emit();
     });
   }
 
   onRandomLayoutGenerated() {
     this.widgets = generateRandomWidgetItems();
-  }
-
-  scrollBottom() {
-    if (this.containerRef) {
-      this.containerRef.nativeElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'end',
-      });
-    }
+    this.isNewWidgetAdded = false;
   }
 }

@@ -12,8 +12,11 @@
 >
   @for (widget of widgets; track widget.id) {
   <div
+    [@pulse]="isNewWidgetAdded && $last"
     class="nxt-draggable-widget"
-    [ngClass]="{ 'full-width-widget': widget.isFullWidth }"
+    [ngClass]="{
+      'full-width-widget': widget.isFullWidth
+    }"
     [style.backgroundColor]="widget.backgroundColor"
     [style.cursor]="isEditModeOn ? 'move' : 'no-drop'"
   >

@@ -28,4 +28,13 @@ export interface Tile {
 export class AppComponent {
   @ViewChild('mainRef', { read: ElementRef<HTMLElement> })
   mainElement!: ElementRef<HTMLElement>;
+
+  onNewWidgetAdded() {
+    if (this.mainElement) {
+      this.mainElement.nativeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+      });
+    }
+  }
 }

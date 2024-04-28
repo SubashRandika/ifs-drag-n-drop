@@ -1,4 +1,4 @@
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass, NgIf, NgStyle } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SortablejsModule } from 'nxt-sortablejs';
 import { Options } from 'sortablejs';
@@ -17,7 +17,13 @@ import { WidgetLayoutActionsPanelComponent } from '../katoid-widget-layout/widge
   templateUrl: './nxt-sortablejs-layout.component.html',
   styleUrls: ['./nxt-sortablejs-layout.component.css'],
   standalone: true,
-  imports: [SortablejsModule, NgClass, WidgetLayoutActionsPanelComponent, NgIf],
+  imports: [
+    SortablejsModule,
+    NgClass,
+    WidgetLayoutActionsPanelComponent,
+    NgIf,
+    NgStyle,
+  ],
   animations: [pulseAnimation],
 })
 export class NxtSortablejsLayoutComponent implements OnInit {

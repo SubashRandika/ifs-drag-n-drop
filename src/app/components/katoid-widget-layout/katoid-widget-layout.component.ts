@@ -131,7 +131,7 @@ export class KatoidWidgetLayoutComponent implements OnInit {
   }
 
   onLayoutUpdated(event: WidgetLayout) {
-    console.log('onLayoutUpdated', event);
+    // console.log('onLayoutUpdated', event);
   }
 
   onRandomLayoutGenerated() {
@@ -145,10 +145,11 @@ export class KatoidWidgetLayoutComponent implements OnInit {
         x: Math.round(Math.random() * Math.floor(this.cols / 2 - 1)) * 2,
         y: Math.floor(i / 6) * y,
         w: 2,
-        h: y,
+        h: 5,
       });
     }
 
+    console.log('newLayout', newLayout);
     this.layout = ktdGridCompact(newLayout, 'horizontal', this.cols);
     this.layout = this.addDynamicContentAndColorIntoWidgets();
   }

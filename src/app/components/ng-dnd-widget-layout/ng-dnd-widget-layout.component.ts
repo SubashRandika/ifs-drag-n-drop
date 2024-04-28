@@ -5,14 +5,14 @@ import { DndModule } from '@ng-dnd/core';
 import { generateRandomLightColor } from '../../utils/colors';
 import { DragDropDirective } from '../../directives/drag-drop.directive';
 import { Widget } from '../../models/widget.models';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe, NgIf, NgStyle } from '@angular/common';
 
 @Component({
   selector: 'ng-dnd-widget-layout',
   templateUrl: './ng-dnd-widget-layout.component.html',
   styleUrls: ['./ng-dnd-widget-layout.component.css'],
   standalone: true,
-  imports: [MatGridListModule, DndModule, DragDropDirective, AsyncPipe, NgIf],
+  imports: [MatGridListModule, DndModule, DragDropDirective, AsyncPipe, NgIf, NgStyle],
 })
 export class NgDndWidgetLayoutComponent implements OnInit {
   widgets: Widget[] = [

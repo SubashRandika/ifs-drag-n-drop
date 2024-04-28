@@ -17,8 +17,10 @@
     [ngClass]="{
       'full-width-widget': widget.isFullWidth
     }"
-    [style.backgroundColor]="widget.backgroundColor"
-    [style.cursor]="isEditModeOn ? 'move' : 'no-drop'"
+    [ngStyle]="{
+      backgroundColor: widget.backgroundColor,
+      cursor: isEditModeOn ? 'move' : 'no-drop'
+    }"
   >
     {{ widget.content }}
   </div>

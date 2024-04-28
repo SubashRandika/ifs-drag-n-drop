@@ -9,8 +9,10 @@
     [rowspan]="widget.rows"
     [dragSource]="dragWidget.source"
     [dropTarget]="dragWidget.target"
-    [style.opacity]="dragWidget.opacity$ | async"
-    [style.backgroundColor]="widget.backgroundColor"
+    [ngStyle]="{
+      opacity: dragWidget.opacity$ | async,
+      backgroundColor: widget.backgroundColor
+    }"
     [index]="$index"
     (beginDrag)="beginDrag()"
     (endDrag)="endDrag($event)"

@@ -14,6 +14,7 @@ import { debounceTime, filter, fromEvent, merge, Subscription } from 'rxjs';
 import { WidgetLayout, WidgetLayoutItem } from '../../models/widget.models';
 import { generateRandomLightColor } from '../../utils/colors';
 import { WidgetLayoutActionsPanelComponent } from './widget-layout-actions-panel/widget-layout-actions-panel.component';
+import { generateRandomBoolean } from '../../utils/randomInfo';
 
 @Component({
   selector: 'katoid-widget-layout',
@@ -31,12 +32,12 @@ import { WidgetLayoutActionsPanelComponent } from './widget-layout-actions-panel
 })
 export class KatoidWidgetLayoutComponent implements OnInit {
   public document: Document = inject(DOCUMENT);
-  minWidth: number = 2;
+  minWidth: number = 1;
   minHeight: number = 5;
 
   @ViewChild(KtdGridComponent, { static: true }) grid!: KtdGridComponent;
 
-  cols: number = 4;
+  cols: number = 2;
   gap: number = 10;
   rowHeight: number = 30;
   rowHeightFit: boolean = false;
@@ -57,63 +58,7 @@ export class KatoidWidgetLayoutComponent implements OnInit {
     columnColor: 'rgba(128, 128, 128, 0.06)',
   };
 
-  layout: WidgetLayout = [
-    {
-      id: '1',
-      content: 'Widget 1',
-      backgroundColor: generateRandomLightColor(),
-      x: 0,
-      y: 0,
-      w: this.minWidth,
-      h: this.minHeight,
-    },
-    {
-      id: '2',
-      content: 'Widget 2',
-      backgroundColor: generateRandomLightColor(),
-      x: 2,
-      y: 0,
-      w: this.minWidth,
-      h: this.minHeight,
-    },
-    {
-      id: '3',
-      content: 'Widget 3',
-      backgroundColor: generateRandomLightColor(),
-      x: 0,
-      y: 4,
-      w: this.minWidth * 2,
-      h: this.minHeight,
-    },
-    {
-      id: '4',
-      content: 'Widget 4',
-      backgroundColor: generateRandomLightColor(),
-      x: 0,
-      y: 8,
-      w: this.minWidth,
-      h: this.minHeight,
-    },
-    {
-      id: '5',
-      content: 'Widget 5',
-      backgroundColor: generateRandomLightColor(),
-      x: 2,
-      y: 4,
-      w: this.minWidth,
-      h: this.minHeight,
-    },
-    {
-      id: '6',
-      content: 'Widget 6',
-      backgroundColor: generateRandomLightColor(),
-      x: 0,
-      y: 8,
-      w: this.minWidth,
-      h: this.minHeight,
-    },
-  ];
-
+  layout: WidgetLayout = this.onRandomLayoutGenerated();
   trackById = ktdTrackById;
 
   ngOnInit() {
@@ -134,17 +79,17 @@ export class KatoidWidgetLayoutComponent implements OnInit {
     // console.log('onLayoutUpdated', event);
   }
 
-  onRandomLayoutGenerated() {
+  onRandomLayoutGenerated(): WidgetLayoutItem[] {
     const newLayout: WidgetLayout = [];
 
-    for (let i = 0; i < this.cols; i++) {
-      const y = Math.ceil(Math.random() * 4) + 1;
+    for (let i = 0; i < this.cols * 4; i++) {
+      const y = Math.ceil(Math.random() * 2) + 1;
 
       newLayout.push({
         id: i.toString(),
         x: Math.round(Math.random() * Math.floor(this.cols / 2 - 1)) * 2,
         y: Math.floor(i / 6) * y,
-        w: 2,
+        w: generateRandomBoolean() ? this.minWidth : this.minWidth * 2,
         h: 5,
       });
     }
@@ -152,6 +97,8 @@ export class KatoidWidgetLayoutComponent implements OnInit {
     console.log('newLayout', newLayout);
     this.layout = ktdGridCompact(newLayout, 'horizontal', this.cols);
     this.layout = this.addDynamicContentAndColorIntoWidgets();
+
+    return this.layout;
   }
 
   // removeWidgetFromLayout(id: string) {
@@ -182,8 +129,8 @@ export class KatoidWidgetLayoutComponent implements OnInit {
       id: nextId.toString(),
       x: -1,
       y: -1,
-      w: 2,
-      h: 4,
+      w: generateRandomBoolean() ? this.minWidth : this.minWidth * 2,
+      h: 5,
     };
 
     // Important: Don't mutate the original array here, create clone of it.

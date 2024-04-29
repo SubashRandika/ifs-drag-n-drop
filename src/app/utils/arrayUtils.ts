@@ -1,4 +1,4 @@
-import { Widget, WidgetItem } from '../models/widget.models';
+import { WidgetItem } from '../models/widget.models';
 import { generateRandomLightColor } from './colors';
 import { generateRandomBoolean, generateRandomUUID } from './randomInfo';
 

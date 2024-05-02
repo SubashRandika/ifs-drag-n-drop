@@ -4,6 +4,7 @@ import { KatoidWidgetLayoutComponent } from './components/katoid-widget-layout/k
 import { NgDndWidgetLayoutComponent } from './components/ng-dnd-widget-layout/ng-dnd-widget-layout.component';
 import { WidgetGridLayoutComponent } from './components/widget-grid-layout/widget-grid-layout.component';
 import { NxtSortablejsLayoutComponent } from './components/nxt-sortablejs-layout/nxt-sortablejs-layout.component';
+import { GridsterGridLayoutComponent } from './components/gridster-grid-layout/gridster-grid-layout.component';
 
 export interface Tile {
   color: string;
@@ -21,6 +22,7 @@ export interface Tile {
     NgDndWidgetLayoutComponent,
     KatoidWidgetLayoutComponent,
     NxtSortablejsLayoutComponent,
+    GridsterGridLayoutComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

@@ -1,0 +1,5 @@
+<gridster [options]="options">
+  <gridster-item *ngFor="let item of dashboard" [item]="item">
+    {{ item["label"] }}
+  </gridster-item>
+</gridster>

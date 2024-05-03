@@ -1,130 +1,155 @@
-import { Component, OnInit } from '@angular/core';
+import { NgForOf, NgStyle } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   CompactType,
   DisplayGrid,
   GridsterComponent,
+  GridsterComponentInterface,
   GridsterItem,
   GridsterItemComponent,
+  GridsterItemComponentInterface,
   GridType,
 } from 'angular-gridster2';
 import { Safe } from '../../models/widget.models';
-import { NgForOf } from '@angular/common';
+import { generateRandomLightColor } from '../../utils/colors';
+import { WidgetLayoutActionsPanelComponent } from '../katoid-widget-layout/widget-layout-actions-panel/widget-layout-actions-panel.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AddWidgetDialogComponent } from './add-widget-dialog/add-widget-dialog.component';
 
 @Component({
   selector: 'gridster-grid-layout',
   templateUrl: './gridster-grid-layout.component.html',
   styleUrls: ['./gridster-grid-layout.component.css'],
   standalone: true,
-  imports: [GridsterComponent, GridsterItemComponent, NgForOf],
+  imports: [
+    GridsterComponent,
+    GridsterItemComponent,
+    NgForOf,
+    NgStyle,
+    WidgetLayoutActionsPanelComponent,
+  ],
 })
 export class GridsterGridLayoutComponent implements OnInit {
+  addWidgetDialog: MatDialog = inject(MatDialog);
+
   options!: Safe;
   dashboard!: Array<GridsterItem>;
+  isEditModeOn: boolean = false;
+
+  static gridInit(gridster: GridsterComponentInterface): void {
+    console.log('GridInitialized', gridster);
+  }
+
+  static itemChange(
+    item: GridsterItem,
+    itemComponent: GridsterItemComponentInterface
+  ) {
+    console.log('WidgetChanged', item, itemComponent);
+  }
 
   constructor() {}
 
   ngOnInit() {
     this.options = {
-      gridType: GridType.Fit,
+      gridType: GridType.VerticalFixed,
       compactType: CompactType.None,
       margin: 10,
       outerMargin: true,
-      outerMarginTop: null,
-      outerMarginRight: null,
-      outerMarginBottom: null,
-      outerMarginLeft: null,
       useTransformPositioning: true,
-      mobileBreakpoint: 640,
+      mobileBreakpoint: 1200,
       useBodyForBreakpoint: false,
-      minCols: 1,
+      setGridSize: true,
+      minCols: 2,
       maxCols: 2,
       minRows: 1,
-      maxRows: 100,
-      maxItemCols: 2,
-      minItemCols: 1,
-      maxItemRows: 100,
-      minItemRows: 1,
-      maxItemArea: 2500,
-      minItemArea: 1,
       defaultItemCols: 1,
       defaultItemRows: 1,
-      fixedColWidth: 105,
+      minItemCols: 1,
+      maxItemCols: 2,
+      minItemRows: 1,
+      maxItemRows: 2,
+      addEmptyRowsCount: 3,
       fixedRowHeight: 200,
-      keepFixedHeightInMobile: false,
+      keepFixedHeightInMobile: true,
       keepFixedWidthInMobile: false,
       scrollSensitivity: 10,
       scrollSpeed: 20,
-      enableEmptyCellClick: false,
-      enableEmptyCellContextMenu: false,
-      enableEmptyCellDrop: false,
-      enableEmptyCellDrag: false,
-      enableOccupiedCellDrop: false,
-      emptyCellDragMaxCols: 50,
-      emptyCellDragMaxRows: 50,
       ignoreMarginInRow: false,
       draggable: {
-        enabled: true,
+        enabled: false,
       },
       resizable: {
-        enabled: true,
+        enabled: false,
       },
-      swap: false,
+      swap: true,
       pushItems: true,
-      disablePushOnDrag: false,
-      disablePushOnResize: false,
       pushDirections: { north: true, east: true, south: true, west: true },
-      pushResizeItems: false,
-      displayGrid: DisplayGrid.Always,
-      disableWindowResize: false,
-      disableWarnings: false,
-      scrollToNewItems: false,
+      displayGrid: DisplayGrid.OnDragAndResize,
+      scrollToNewItems: true,
       enableBoundaryControl: true,
+      initCallback: GridsterGridLayoutComponent.gridInit,
+      itemChangeCallback: GridsterGridLayoutComponent.itemChange,
     };
 
-    this.dashboard = [
-      { cols: 2, rows: 1, y: 0, x: 0 },
-      { cols: 2, rows: 2, y: 0, x: 2, hasContent: true },
-      { cols: 1, rows: 1, y: 0, x: 4 },
-      { cols: 1, rows: 1, y: 2, x: 5 },
-      { cols: 1, rows: 1, y: 1, x: 0 },
-      { cols: 1, rows: 1, y: 1, x: 0 },
-      {
-        cols: 2,
-        rows: 2,
-        y: 3,
-        x: 5,
-        minItemRows: 2,
-        minItemCols: 2,
-        label: 'Min rows & cols = 2',
+    this.dashboard = [];
+  }
+
+  toggleEditMode() {
+    this.isEditModeOn = !this.options.draggable.enabled;
+    this.options = {
+      ...this.options,
+      draggable: {
+        ...this.options.draggable,
+        enabled: !this.options.draggable.enabled,
       },
-      {
-        cols: 2,
-        rows: 2,
-        y: 2,
-        x: 0,
-        maxItemRows: 2,
-        maxItemCols: 2,
-        label: 'Max rows & cols = 2',
+    };
+  }
+
+  keepEditModeOn(): void {
+    this.isEditModeOn = true;
+    this.options = {
+      ...this.options,
+      draggable: {
+        ...this.options.draggable,
+        enabled: this.isEditModeOn,
       },
-      {
-        cols: 2,
-        rows: 1,
-        y: 2,
-        x: 2,
-        dragEnabled: true,
-        resizeEnabled: true,
-        label: 'Drag&Resize Enabled',
-      },
-      {
-        cols: 1,
-        rows: 1,
-        y: 2,
-        x: 4,
-        dragEnabled: false,
-        resizeEnabled: false,
-        label: 'Drag&Resize Disabled',
-      },
-      { cols: 1, rows: 1, y: 2, x: 6 },
-    ];
+    };
+  }
+
+  addWidgetToLayout() {
+    const dialogRef = this.addWidgetDialog.open(AddWidgetDialogComponent, {
+      width: '20vw',
+      height: '40vh',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      let possibleX: number = 0;
+      let possibleY: number = 0;
+
+      if (result) {
+        if (this.options?.api && this.options?.api?.getFirstPossiblePosition) {
+          possibleX = this.options.api.getFirstPossiblePosition(
+            this.dashboard[this.dashboard.length - 1]
+          ).x;
+          possibleY = this.options.api.getFirstPossiblePosition(
+            this.dashboard[this.dashboard.length - 1]
+          ).y;
+        }
+
+        this.dashboard.push({
+          x: this.dashboard.length === 0 ? 0 : possibleX,
+          y: this.dashboard.length === 0 ? 0 : possibleY,
+          cols: result?.data?.width === 'full' ? 2 : 1,
+          rows: result?.data?.height ?? 1,
+          label: `Widget ${this.dashboard.length + 1}`,
+          backgroundColor: generateRandomLightColor(),
+        });
+
+        this.keepEditModeOn();
+      }
+    });
   }
 }

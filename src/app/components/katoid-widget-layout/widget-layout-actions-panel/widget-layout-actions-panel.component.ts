@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,9 +8,12 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './widget-layout-actions-panel.component.html',
   styleUrls: ['./widget-layout-actions-panel.component.css'],
   standalone: true,
-  imports: [MatButtonModule, MatIconModule],
+  imports: [MatButtonModule, MatIconModule, NgIf],
 })
 export class WidgetLayoutActionsPanelComponent implements OnInit {
+  @Input()
+  hideRandomGenerateButton: boolean = false;
+
   @Input()
   editModeOn: boolean = false;
 

@@ -1,5 +1,20 @@
+<widget-layout-actions-panel
+  [hideRandomGenerateButton]="true"
+  [editModeOn]="dashboard.length === 0 || isEditModeOn"
+  (addNewWidget)="addWidgetToLayout()"
+  (editWidgetLayout)="toggleEditMode()"
+/>
 <gridster [options]="options">
-  <gridster-item *ngFor="let item of dashboard" [item]="item">
-    {{ item["label"] }}
+  <gridster-item
+    *ngFor="let item of dashboard"
+    [item]="item"
+    [ngStyle]="{
+      cursor: isEditModeOn ? 'move' : 'not-allowed',
+      backgroundColor: item['backgroundColor']
+    }"
+  >
+    <div class="widget-container">
+      <p>{{ item["label"] }}</p>
+    </div>
   </gridster-item>
 </gridster>

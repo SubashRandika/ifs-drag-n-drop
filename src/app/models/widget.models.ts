@@ -33,3 +33,8 @@ export interface Safe extends GridsterConfig {
   resizable: Resizable;
   pushDirections?: PushDirections;
 }
+
+export interface NewWidgetData {
+  width: 'full' | 'half';
+  height: number;
+}

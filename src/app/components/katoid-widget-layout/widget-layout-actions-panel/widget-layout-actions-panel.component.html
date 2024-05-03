@@ -1,6 +1,7 @@
 <div class="actions-container">
   <div class="left-actions">
     <button
+      *ngIf="!hideRandomGenerateButton"
       mat-flat-button
       color="primary"
       (click)="generateLayout()"

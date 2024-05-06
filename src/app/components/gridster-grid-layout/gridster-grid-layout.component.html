@@ -13,8 +13,8 @@
       backgroundColor: item['backgroundColor']
     }"
   >
-    <div class="widget-container">
-      <p>{{ item["label"] }}</p>
-    </div>
+    <ng-container
+      *ngComponentOutlet="item['widget']; inputs: item['widgetInputs']"
+    ></ng-container>
   </gridster-item>
 </gridster>

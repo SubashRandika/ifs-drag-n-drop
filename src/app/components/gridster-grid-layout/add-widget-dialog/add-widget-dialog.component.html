@@ -9,7 +9,13 @@
   </div>
   <mat-form-field>
     <mat-label>Height</mat-label>
-    <input matInput [(ngModel)]="data.height" type="number" min="1" />
+    <input
+      matInput
+      [(ngModel)]="data.height"
+      type="number"
+      min="1"
+      placeholder="Height"
+    />
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

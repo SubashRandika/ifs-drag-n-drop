@@ -1,4 +1,4 @@
-import { NgForOf, NgStyle } from '@angular/common';
+import { NgComponentOutlet, NgForOf, NgStyle } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {
@@ -15,6 +15,9 @@ import {
 import { generateRandomLightColor } from '../../utils/colors';
 import { WidgetLayoutActionsPanelComponent } from '../katoid-widget-layout/widget-layout-actions-panel/widget-layout-actions-panel.component';
 import { AddWidgetDialogComponent } from './add-widget-dialog/add-widget-dialog.component';
+import { GraniteDragDropGridComponent } from './granite-drag-drop-grid/granite-drag-drop-grid.component';
+import { SampleWidget1Component } from './sample-widgets/sample-widget-1/sample-widget-1.component';
+import { SampleWidget2Component } from './sample-widgets/sample-widget-2/sample-widget-2.component';
 
 @Component({
   selector: 'gridster-grid-layout',
@@ -27,6 +30,8 @@ import { AddWidgetDialogComponent } from './add-widget-dialog/add-widget-dialog.
     NgForOf,
     NgStyle,
     WidgetLayoutActionsPanelComponent,
+    GraniteDragDropGridComponent,
+    NgComponentOutlet,
   ],
 })
 export class GridsterGridLayoutComponent implements OnInit {
@@ -147,6 +152,13 @@ export class GridsterGridLayoutComponent implements OnInit {
           rows: result?.data?.height ?? 1,
           label: `Widget ${this.dashboard.length + 1}`,
           backgroundColor: generateRandomLightColor(),
+          widget:
+            Math.random() > 0.5
+              ? SampleWidget1Component
+              : SampleWidget2Component,
+          widgetInputs: {
+            widgetId: this.dashboard.length + 1,
+          },
         });
 
         this.keepEditModeOn();

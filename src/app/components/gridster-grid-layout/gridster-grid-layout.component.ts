@@ -1,19 +1,19 @@
 import { NgForOf, NgStyle } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import {
   CompactType,
   DisplayGrid,
   GridsterComponent,
   GridsterComponentInterface,
+  GridsterConfig,
   GridsterItem,
   GridsterItemComponent,
   GridsterItemComponentInterface,
   GridType,
 } from 'angular-gridster2';
-import { Safe } from '../../models/widget.models';
 import { generateRandomLightColor } from '../../utils/colors';
 import { WidgetLayoutActionsPanelComponent } from '../katoid-widget-layout/widget-layout-actions-panel/widget-layout-actions-panel.component';
-import { MatDialog } from '@angular/material/dialog';
 import { AddWidgetDialogComponent } from './add-widget-dialog/add-widget-dialog.component';
 
 @Component({
@@ -32,7 +32,7 @@ import { AddWidgetDialogComponent } from './add-widget-dialog/add-widget-dialog.
 export class GridsterGridLayoutComponent implements OnInit {
   addWidgetDialog: MatDialog = inject(MatDialog);
 
-  options!: Safe;
+  options!: GridsterConfig;
   dashboard!: Array<GridsterItem>;
   isEditModeOn: boolean = false;
 
@@ -58,6 +58,7 @@ export class GridsterGridLayoutComponent implements OnInit {
       useTransformPositioning: true,
       mobileBreakpoint: 1200,
       useBodyForBreakpoint: false,
+      disableAutoPositionOnConflict: true,
       setGridSize: true,
       minCols: 2,
       maxCols: 2,
@@ -67,7 +68,6 @@ export class GridsterGridLayoutComponent implements OnInit {
       minItemCols: 1,
       maxItemCols: 2,
       minItemRows: 1,
-      maxItemRows: 2,
       addEmptyRowsCount: 3,
       fixedRowHeight: 200,
       keepFixedHeightInMobile: true,
@@ -83,6 +83,7 @@ export class GridsterGridLayoutComponent implements OnInit {
       },
       swap: true,
       pushItems: true,
+      disablePushOnDrag: false,
       pushDirections: { north: true, east: true, south: true, west: true },
       displayGrid: DisplayGrid.OnDragAndResize,
       scrollToNewItems: true,
@@ -95,12 +96,12 @@ export class GridsterGridLayoutComponent implements OnInit {
   }
 
   toggleEditMode() {
-    this.isEditModeOn = !this.options.draggable.enabled;
+    this.isEditModeOn = !this.options?.draggable?.enabled;
     this.options = {
       ...this.options,
       draggable: {
         ...this.options.draggable,
-        enabled: !this.options.draggable.enabled,
+        enabled: !this.options?.draggable?.enabled,
       },
     };
   }
@@ -118,8 +119,8 @@ export class GridsterGridLayoutComponent implements OnInit {
 
   addWidgetToLayout() {
     const dialogRef = this.addWidgetDialog.open(AddWidgetDialogComponent, {
-      width: '20vw',
-      height: '40vh',
+      width: '25vw',
+      height: '50vh',
       maxWidth: '100vw',
       maxHeight: '100vh',
       disableClose: true,

@@ -1,10 +1,4 @@
 import { KtdGridLayoutItem } from '@katoid/angular-grid-layout';
-import {
-  Draggable,
-  GridsterConfig,
-  PushDirections,
-  Resizable,
-} from 'angular-gridster2';
 
 export interface Widget {
   id: number;
@@ -27,12 +21,6 @@ export interface WidgetLayoutItem extends KtdGridLayoutItem {
 }
 
 export declare type WidgetLayout = WidgetLayoutItem[];
-
-export interface Safe extends GridsterConfig {
-  draggable: Draggable;
-  resizable: Resizable;
-  pushDirections?: PushDirections;
-}
 
 export interface NewWidgetData {
   width: 'full' | 'half';

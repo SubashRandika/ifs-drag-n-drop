@@ -13,12 +13,11 @@ import {
   GridType,
 } from 'angular-gridster2';
 import { generateRandomLightColor } from '../../utils/colors';
+import { generateRandomUUID } from '../../utils/randomInfo';
 import { WidgetLayoutActionsPanelComponent } from '../katoid-widget-layout/widget-layout-actions-panel/widget-layout-actions-panel.component';
 import { AddWidgetDialogComponent } from './add-widget-dialog/add-widget-dialog.component';
-import { GraniteDragDropGridComponent } from './granite-drag-drop-grid/granite-drag-drop-grid.component';
 import { SampleWidget1Component } from './sample-widgets/sample-widget-1/sample-widget-1.component';
 import { SampleWidget2Component } from './sample-widgets/sample-widget-2/sample-widget-2.component';
-import { generateRandomUUID } from '../../utils/randomInfo';
 
 @Component({
   selector: 'gridster-grid-layout',
@@ -31,7 +30,6 @@ import { generateRandomUUID } from '../../utils/randomInfo';
     NgForOf,
     NgStyle,
     WidgetLayoutActionsPanelComponent,
-    GraniteDragDropGridComponent,
     NgComponentOutlet,
   ],
 })

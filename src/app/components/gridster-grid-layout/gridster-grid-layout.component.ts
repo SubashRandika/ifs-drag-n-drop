@@ -18,6 +18,7 @@ import { AddWidgetDialogComponent } from './add-widget-dialog/add-widget-dialog.
 import { GraniteDragDropGridComponent } from './granite-drag-drop-grid/granite-drag-drop-grid.component';
 import { SampleWidget1Component } from './sample-widgets/sample-widget-1/sample-widget-1.component';
 import { SampleWidget2Component } from './sample-widgets/sample-widget-2/sample-widget-2.component';
+import { generateRandomUUID } from '../../utils/randomInfo';
 
 @Component({
   selector: 'gridster-grid-layout',
@@ -145,6 +146,8 @@ export class GridsterGridLayoutComponent implements OnInit {
           ).y;
         }
 
+        const isSampleWidget1: boolean = Math.random() > 0.5;
+
         this.dashboard.push({
           x: this.dashboard.length === 0 ? 0 : possibleX,
           y: this.dashboard.length === 0 ? 0 : possibleY,
@@ -152,12 +155,12 @@ export class GridsterGridLayoutComponent implements OnInit {
           rows: result?.data?.height ?? 1,
           label: `Widget ${this.dashboard.length + 1}`,
           backgroundColor: generateRandomLightColor(),
-          widget:
-            Math.random() > 0.5
-              ? SampleWidget1Component
-              : SampleWidget2Component,
+          widget: isSampleWidget1
+            ? SampleWidget1Component
+            : SampleWidget2Component,
           widgetInputs: {
-            widgetId: this.dashboard.length + 1,
+            widgetId: generateRandomUUID(),
+            description: `Sample Widget ${isSampleWidget1 ? '1' : '2'}`,
           },
         });
 

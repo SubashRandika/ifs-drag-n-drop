@@ -1,4 +1,9 @@
-<div class="widget-wrapper">
+<div
+  class="widget-wrapper"
+  [ngStyle]="{
+    backgroundColor: backgroundColor,
+  }"
+>
   <p>Id: {{ widgetId }}</p>
   <p>{{ description }}</p>
 </div>

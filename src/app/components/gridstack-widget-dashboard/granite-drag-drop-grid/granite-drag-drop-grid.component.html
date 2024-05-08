@@ -1,0 +1,10 @@
+<gridstack [options]="gridOptions" (changeCB)="onChange($event)">
+  <gridstack-item
+    *ngFor="let item of items; trackBy: identify"
+    [options]="item"
+  >
+    <ng-container
+      *ngComponentOutlet="item['component']; inputs: item['inputs']"
+    ></ng-container>
+  </gridstack-item>
+</gridstack>

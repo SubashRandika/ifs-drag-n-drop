@@ -1,4 +1,5 @@
 import { KtdGridLayoutItem } from '@katoid/angular-grid-layout';
+import { GridStackWidget } from 'gridstack';
 
 export interface Widget {
   id: number;
@@ -25,4 +26,8 @@ export declare type WidgetLayout = WidgetLayoutItem[];
 export interface NewWidgetData {
   width: 'full' | 'half';
   height: number;
+}
+
+export interface GridStackWidgetItem extends GridStackWidget {
+  [key: string]: any;
 }

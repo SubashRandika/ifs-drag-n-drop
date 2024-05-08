@@ -152,13 +152,13 @@ export class GridsterGridLayoutComponent implements OnInit {
           cols: result?.data?.width === 'full' ? 2 : 1,
           rows: result?.data?.height ?? 1,
           label: `Widget ${this.dashboard.length + 1}`,
-          backgroundColor: generateRandomLightColor(),
           widget: isSampleWidget1
             ? SampleWidget1Component
             : SampleWidget2Component,
           widgetInputs: {
             widgetId: generateRandomUUID(),
             description: `Sample Widget ${isSampleWidget1 ? '1' : '2'}`,
+            backgroundColor: generateRandomLightColor(),
           },
         });
 

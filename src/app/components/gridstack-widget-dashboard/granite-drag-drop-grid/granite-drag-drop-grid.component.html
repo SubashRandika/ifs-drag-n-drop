@@ -1,7 +1,15 @@
-<gridstack [options]="gridOptions" (changeCB)="onChange($event)">
+<gridstack
+  #gridstack
+  [options]="gridConfigurations"
+  (changeCB)="onChange($event)"
+  [ngStyle]="{ backgroundColor: enableDragMove ? '#f1f0f0' : 'transparent' }"
+>
   <gridstack-item
-    *ngFor="let item of items; trackBy: identify"
+    *ngFor="let item of gridWidgetItems; trackBy: identify"
     [options]="item"
+    [ngStyle]="{
+      cursor: enableDragMove ? 'move' : 'not-allowed'
+    }"
   >
     <ng-container
       *ngComponentOutlet="item['component']; inputs: item['inputs']"

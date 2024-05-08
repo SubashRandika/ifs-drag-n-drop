@@ -1,4 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+@import "gridstack/dist/gridstack.min.css";
+@import "gridstack/dist/gridstack-extra.min.css";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.grid-stack {
+  .grid-stack-item {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+.grid-stack-placeholder > .placeholder-content {
+  box-sizing: border-box;
+  background-color: rgba(220, 220, 220, 0.7);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  border: 2px dotted rgba(54, 54, 54, 0.35);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -51,7 +51,7 @@ export class GridstackWidgetDashboardComponent implements OnInit {
   addWidgetToLayout() {
     const dialogRef = this.addWidgetDialog.open(AddWidgetDialogComponent, {
       width: '25vw',
-      height: '50vh',
+      height: '60vh',
       maxWidth: '100vw',
       maxHeight: '100vh',
       disableClose: true,

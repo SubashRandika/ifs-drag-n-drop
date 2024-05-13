@@ -16,13 +16,13 @@ import {
 import { GridStackWidgetItem } from '../../../models/widget.models';
 
 @Component({
-  selector: 'granite-drag-drop-grid',
-  templateUrl: './granite-drag-drop-grid.component.html',
-  styleUrls: ['./granite-drag-drop-grid.component.css'],
+  selector: 'granite-drop-grid',
+  templateUrl: './granite-drop-grid.component.html',
+  styleUrls: ['./granite-drop-grid.component.css'],
   standalone: true,
   imports: [GridstackModule, NgForOf, NgStyle, NgComponentOutlet],
 })
-export class GraniteDragDropGridComponent implements OnInit, OnChanges {
+export class GraniteDropGridComponent implements OnInit, OnChanges {
   @ViewChild(GridstackComponent)
   gridstack!: GridstackComponent;
 

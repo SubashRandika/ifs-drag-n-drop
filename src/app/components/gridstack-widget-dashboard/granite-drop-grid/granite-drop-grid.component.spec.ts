@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { GraniteDragDropGridComponent } from './granite-drag-drop-grid.component';
+import { GraniteDropGridComponent } from './granite-drop-grid.component';
 
-describe('GraniteDragDropGridComponent', () => {
-  let component: GraniteDragDropGridComponent;
-  let fixture: ComponentFixture<GraniteDragDropGridComponent>;
+describe('GraniteDropGridComponent', () => {
+  let component: GraniteDropGridComponent;
+  let fixture: ComponentFixture<GraniteDropGridComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GraniteDragDropGridComponent ]
+      declarations: [ GraniteDropGridComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GraniteDragDropGridComponent);
+    fixture = TestBed.createComponent(GraniteDropGridComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

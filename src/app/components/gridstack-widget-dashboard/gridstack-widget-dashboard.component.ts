@@ -8,14 +8,14 @@ import { AddWidgetDialogComponent } from '../gridster-grid-layout/add-widget-dia
 import { SampleWidget1Component } from '../gridster-grid-layout/sample-widgets/sample-widget-1/sample-widget-1.component';
 import { SampleWidget2Component } from '../gridster-grid-layout/sample-widgets/sample-widget-2/sample-widget-2.component';
 import { WidgetLayoutActionsPanelComponent } from '../katoid-widget-layout/widget-layout-actions-panel/widget-layout-actions-panel.component';
-import { GraniteDragDropGridComponent } from './granite-drag-drop-grid/granite-drag-drop-grid.component';
+import { GraniteDropGridComponent } from './granite-drop-grid/granite-drop-grid.component';
 
 @Component({
   selector: 'gridstack-widget-dashboard',
   templateUrl: './gridstack-widget-dashboard.component.html',
   styleUrls: ['./gridstack-widget-dashboard.component.css'],
   standalone: true,
-  imports: [GraniteDragDropGridComponent, WidgetLayoutActionsPanelComponent],
+  imports: [GraniteDropGridComponent, WidgetLayoutActionsPanelComponent],
 })
 export class GridstackWidgetDashboardComponent implements OnInit {
   addWidgetDialog: MatDialog = inject(MatDialog);

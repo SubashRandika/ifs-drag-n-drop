@@ -29,7 +29,6 @@ export class GridstackWidgetDashboardComponent implements OnInit {
     removable: false,
     disableDrag: true,
     disableResize: true,
-    sizeToContent: true,
     placeholderText: 'Drop Here',
     column: 2,
     columnOpts: {

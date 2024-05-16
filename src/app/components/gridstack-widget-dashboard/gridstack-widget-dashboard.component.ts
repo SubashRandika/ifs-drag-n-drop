@@ -25,7 +25,7 @@ export class GridstackWidgetDashboardComponent implements OnInit {
   public gridConfigurations: GridStackOptions = {
     margin: 8,
     float: true,
-    cellHeight: 200,
+    cellHeight: 1,
     removable: false,
     disableDrag: true,
     disableResize: true,
@@ -64,7 +64,7 @@ export class GridstackWidgetDashboardComponent implements OnInit {
           ...this.gridWidgetItems,
           {
             w: result?.data?.width === 'full' ? 2 : 1,
-            h: result?.data?.height ?? 1,
+            minH: result?.data?.height ?? 200,
             id: generateRandomUUID(),
             component: isSampleWidget1
               ? SampleWidget1Component

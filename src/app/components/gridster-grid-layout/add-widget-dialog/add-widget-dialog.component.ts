@@ -38,7 +38,7 @@ export class AddWidgetDialogComponent implements OnInit {
   ngOnInit() {
     this.data = {
       width: 'half',
-      height: 1,
+      height: 200,
     };
   }
 
